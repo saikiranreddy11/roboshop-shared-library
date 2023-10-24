@@ -3,11 +3,11 @@ def call(configMap){
     def component = configMap.get("component")
     switch(application_type)
     case nodeJSVMCI:
-                    nodeJSVMCI(configMap) //if the function name is call() in nodeJSVMCI, it is automatically called
-                    break
+                    nodeJSVMCI(configMap); //if the function name is call() in nodeJSVMCI, it is automatically called
+                    break;
     case javaVM:
-                    javaVM(configMap)
-                    break
+                    javaVM(configMap);
+                    break;
     default :
                 echo "Error: enter the correct application type"
 }
