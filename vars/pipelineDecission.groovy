@@ -1,3 +1,4 @@
+#!groovy
 def call(Map configMap){
    def application_type = configMap.get("application_type")
     def component = configMap.get("component")
