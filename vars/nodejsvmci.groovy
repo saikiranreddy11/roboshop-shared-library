@@ -1,3 +1,6 @@
+def call(configMap){
+    def application_type = configMap.get("application_type")
+    def component = configMap.get("component")
 pipeline{
     agent{
         node{
@@ -12,9 +15,9 @@ pipeline{
     options {
         ansiColor('xterm')
     }
-     parameters {
-        string(name: 'component', description: 'version of the artifact to be deployed', defaultValue: '1.0.1')
-    }
+    //  parameters {
+    //     string(name: 'component', description: 'version of the artifact to be deployed', defaultValue: '1.0.1')
+    // }
 
     stages{
         stage("Installing dependecies"){
@@ -40,7 +43,7 @@ pipeline{
         stage("zipping the files"){
             steps{
             sh 'echo "zipping the files"'
-            sh "zip -r ${params.component}.zip ./*  --exclude=.git --exclude=${params.component}.zip "
+            sh "zip -r ${component}.zip ./*  --exclude=.git --exclude=${component}.zip "
             }  
         }
         stage("uploading the artifact"){
@@ -51,12 +54,12 @@ pipeline{
                     nexusUrl: '10.40.30.177:8081/',
                     groupId: 'com.saikiransudhireddy',
                     version: "${version}",
-                    repository: "${params.component}",
+                    repository: "${component}",
                     credentialsId: 'nexus-auth',
                     artifacts: [
-                        [artifactId: "${params.component}",
+                        [artifactId: "${component}",
                             classifier: '',
-                            file: "${params.component}.zip",
+                            file: "${component}.zip",
                             type: 'zip']
         ]
      )
@@ -64,11 +67,11 @@ pipeline{
         }
         stage("deploy"){
             steps{
-                sh 'echo "deploying the ${params.component}"'
+                sh 'echo "deploying the ${component}"'
                 script {
                     // Build the downstream freestyle project
                     def parmter = [string(name:'version',value:"$version")]
-                    build job: "../${params.component}-deploy", wait: true, parameters: parmter
+                    build job: "../${component}-deploy", wait: true, parameters: parmter
                 }
             }
         }
@@ -81,3 +84,4 @@ pipeline{
 }
 
 //parameters: "${version}"
+}
