@@ -10,7 +10,7 @@ def call(Map configMap){
                     javaVM(configMap)
                     break
         default :
-                echo "Error: enter the correct application type"
+               // echo "Error: enter the correct application type"
                 break
     }
 }
