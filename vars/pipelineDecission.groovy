@@ -4,7 +4,7 @@ def call(Map configMap){
     def component = configMap.get("component")
     switch(application_type){
         case 'nodeJSVMCI':
-                    nodeJSVMCI(configMap) //if the function name is call() in nodeJSVMCI, it is automatically called
+                    nodejsvmci(configMap) //if the function name is call() in nodeJSVMCI, it is automatically called
                     break
         case 'javaVM':
                     javaVM(configMap)
