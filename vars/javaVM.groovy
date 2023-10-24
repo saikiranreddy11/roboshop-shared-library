@@ -1,3 +1,3 @@
-def call(configMap){
-    
+def call(Map configMap){
+
 }

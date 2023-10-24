@@ -1,4 +1,4 @@
-def call(configMap){
+def call(Map configMap){
    def application_type = configMap.get("application_type")
     def component = configMap.get("component")
     switch(application_type){
