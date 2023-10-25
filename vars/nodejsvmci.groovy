@@ -71,7 +71,8 @@ pipeline{
                 sh 'echo "deploying the ${component}"'
                 script {
                     // Build the downstream freestyle project
-                    def parmter = [string(name:'version',value:"$version")]
+                    def parmter = [string(name:'version',value:"$version"),
+                                   string(name:'environment',value:"DEV") ]
                     build job: "../${component}-deploy", wait: true, parameters: parmter
                 }
             }
