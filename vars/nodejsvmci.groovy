@@ -72,7 +72,7 @@ pipeline{
                 script {
                     // Build the downstream freestyle project
                     def parmter = [string(name:'version',value:"$version"),
-                                   string(name:'environment',value:"DEV") ]
+                                   string(name:'environment',value:"dev") ]
                     build job: "../${component}-deploy", wait: true, parameters: parmter
                 }
             }
